@@ -6,10 +6,11 @@
     <title>Игровой лендинг</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap">
     <style>
-        * {
+        html, body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            height: 100%;
+            overflow-x: hidden;
         }
        
         body {
@@ -19,16 +20,17 @@
             font-family: 'Rajdhani', sans-serif;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 20px;
+            overscroll-behavior: contain; /* Убирает "прыжок" при прокрутке на мобильных */
         }
        
         .container {
             max-width: 1200px;
             width: 100%;
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 20px 20px 0 20px; /* Убрал нижний padding, чтобы footer сам управлял отступом */
         }
        
         .avatar-section {
@@ -81,9 +83,11 @@
             width: 100%;
             margin-top: 20px;
             position: relative;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
        
-        /* Карусель на мобильных */
         .games-carousel {
             display: flex;
             overflow-x: auto;
@@ -91,15 +95,15 @@
             -webkit-overflow-scrolling: touch;
             gap: 20px;
             padding: 10px 20px;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
         }
        
         .games-carousel::-webkit-scrollbar {
-            display: none; /* Chrome, Safari */
+            display: none;
         }
        
         .game-card {
-            flex: 0 0 85%; /* 85% ширины экрана — удобно листать */
+            flex: 0 0 85%;
             min-width: 280px;
             background: rgba(25, 25, 40, 0.85);
             border-radius: 15px;
@@ -225,12 +229,11 @@
             left: 100%;
         }
        
-        /* Индикаторы прокрутки */
         .carousel-dots {
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-top: 20px;
+            margin: 20px 0;
         }
        
         .dot {
@@ -247,16 +250,16 @@
         }
        
         .footer {
-            margin-top: 50px;
             text-align: center;
             color: #6060a0;
             font-size: 0.8rem;
-            padding: 15px;
+            padding: 20px;
             width: 100%;
             border-top: 1px solid rgba(100, 100, 160, 0.2);
+            margin-top: auto;
         }
        
-        /* Планшеты и десктоп — сетка вместо карусели */
+        /* Планшеты и десктоп */
         @media (min-width: 768px) {
             .games-carousel {
                 display: grid;
@@ -283,7 +286,6 @@
             }
         }
        
-        /* Очень маленькие экраны */
         @media (max-width: 480px) {
             .game-card {
                 flex: 0 0 80%;
@@ -349,7 +351,6 @@
                 </div>
             </div>
            
-            <!-- Точки-индикаторы -->
             <div class="carousel-dots" id="carouselDots"></div>
         </section>
        
@@ -359,7 +360,7 @@
     </div>
 
     <script>
-        // Остальной JavaScript без изменений (startGame, handleImageError, анимации)
+        // JavaScript остаётся тем же (startGame, handleImageError, точки-индикаторы, анимации)
         function startGame(event, gameName) {
             event.preventDefault();
             const button = event.target;
@@ -414,11 +415,7 @@
             container.appendChild(errorText);
         }
        
-        // Анимация появления
         document.addEventListener('DOMContentLoaded', function() {
-            // ... (ваша анимация появления остаётся прежней)
-           
-            // Инициализация точек-индикаторов
             const carousel = document.getElementById('gamesCarousel');
             const dotsContainer = document.getElementById('carouselDots');
             const cards = carousel.querySelectorAll('.game-card');
@@ -430,11 +427,11 @@
             });
            
             const dots = dotsContainer.querySelectorAll('.dot');
-            dots[0].classList.add('active');
+            if (dots.length > 0) dots[0].classList.add('active');
            
             function updateDots() {
                 const scrollLeft = carousel.scrollLeft;
-                const cardWidth = carousel.offsetWidth * 0.85 + 20; // приблизительная ширина карточки + gap
+                const cardWidth = carousel.offsetWidth * 0.85 + 20;
                 const index = Math.round(scrollLeft / cardWidth);
                 dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
             }
