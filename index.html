@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Игровой лендинг</title>
+    <title>Игры из видео</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap">
     <style>
         html, body {
@@ -12,7 +12,7 @@
             height: 100%;
             overflow-x: hidden;
         }
-       
+
         body {
             background: linear-gradient(135deg, #0a0a0f 0%, #151522 100%);
             color: #ffffff;
@@ -21,7 +21,7 @@
             display: flex;
             flex-direction: column;
         }
-       
+
         .container {
             max-width: 1200px;
             width: 100%;
@@ -32,14 +32,14 @@
             padding: 20px 20px 0 20px;
             margin: 0 auto;
         }
-       
+
         .avatar-section {
             text-align: center;
             margin-bottom: 40px;
             width: 100%;
             padding: 0 15px;
         }
-       
+
         .avatar {
             width: 120px;
             height: 120px;
@@ -50,12 +50,12 @@
             margin-bottom: 15px;
             transition: all 0.4s ease;
         }
-       
+
         .avatar:hover {
             transform: rotate(5deg) scale(1.05);
             box-shadow: 0 0 35px rgba(0, 255, 204, 0.6);
         }
-       
+
         .avatar-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 2rem;
@@ -69,7 +69,7 @@
             margin-bottom: 10px;
             text-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
         }
-       
+
         .avatar-subtitle {
             font-size: 1.1rem;
             color: #a0a0ff;
@@ -78,35 +78,34 @@
             line-height: 1.5;
             font-weight: 500;
         }
-       
+
         .games-section {
             width: 100%;
             margin-top: 20px;
-            position: relative;
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-       
+
         .games-carousel {
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
             gap: 20px;
-            padding: 10px 30px; /* Больше отступов слева/справа для центрирования */
+            padding: 10px 30px;
             scrollbar-width: none;
-            touch-action: pan-x pan-y pinch-zoom; /* Разрешает вертикальный скролл страницы */
+            touch-action: pan-x pan-y pinch-zoom; /* Важно: позволяет вертикальный скролл страницы */
             width: 100%;
         }
-       
+
         .games-carousel::-webkit-scrollbar {
             display: none;
         }
-       
+
         .game-card {
-            flex: 0 0 80%; /* Уменьшено с 85% — теперь лучше центрируется */
+            flex: 0 0 80%;
             max-width: 320px;
             min-width: 280px;
             background: rgba(25, 25, 40, 0.85);
@@ -122,14 +121,13 @@
             scroll-snap-align: center;
             backdrop-filter: blur(10px);
         }
-       
-        /* Остальные стили карточек без изменений */
+
         .game-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
             border-color: rgba(0, 255, 204, 0.4);
         }
-       
+
         .game-card:after {
             content: '';
             position: absolute;
@@ -141,11 +139,11 @@
             opacity: 0;
             transition: opacity 0.4s ease;
         }
-       
+
         .game-card:hover:after {
             opacity: 1;
         }
-       
+
         .icon-container {
             width: 100%;
             height: 140px;
@@ -158,19 +156,19 @@
             justify-content: center;
             transition: all 0.3s ease;
         }
-       
+
         .game-card:hover .icon-container {
             transform: scale(1.03);
             background: rgba(15, 15, 30, 0.9);
         }
-       
+
         .game-icon {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
             border-radius: 8px;
         }
-       
+
         .game-name {
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
@@ -189,7 +187,7 @@
             hyphens: auto;
             padding: 0 5px;
         }
-       
+
         .play-button {
             background: linear-gradient(90deg, #0066ff, #00ccff);
             color: white;
@@ -212,7 +210,7 @@
             display: block;
             text-align: center;
         }
-       
+
         .play-button:before {
             content: '';
             position: absolute;
@@ -224,23 +222,23 @@
             transition: 0.6s;
             z-index: -1;
         }
-       
+
         .play-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(0, 102, 255, 0.5);
         }
-       
+
         .play-button:hover:before {
             left: 100%;
         }
-       
+
         .carousel-dots {
             display: flex;
             justify-content: center;
             gap: 10px;
             margin: 25px 0 15px 0;
         }
-       
+
         .dot {
             width: 10px;
             height: 10px;
@@ -248,12 +246,12 @@
             border-radius: 50%;
             transition: all 0.3s ease;
         }
-       
+
         .dot.active {
             background: #00ffcc;
             transform: scale(1.4);
         }
-       
+
         .footer {
             text-align: center;
             color: #6060a0;
@@ -263,8 +261,8 @@
             border-top: 1px solid rgba(100, 100, 160, 0.2);
             margin-top: auto;
         }
-       
-        /* Десктоп и планшеты — сетка */
+
+        /* Планшеты и десктоп */
         @media (min-width: 768px) {
             .games-carousel {
                 display: grid;
@@ -274,44 +272,44 @@
                 gap: 25px;
                 touch-action: auto;
             }
-           
+
             .game-card {
                 flex: none;
                 min-width: auto;
             }
-           
+
             .carousel-dots {
                 display: none;
             }
         }
-       
+
         @media (min-width: 1024px) {
             .games-carousel {
                 grid-template-columns: repeat(4, 1fr);
                 gap: 30px;
             }
         }
-       
+
         @media (max-width: 480px) {
             .game-card {
                 flex: 0 0 78%;
                 min-width: 260px;
                 padding: 16px;
             }
-           
+
             .icon-container {
                 height: 120px;
             }
-           
+
             .game-name {
                 font-size: 1.2rem;
             }
-           
+
             .play-button {
                 padding: 12px 20px;
                 font-size: 1rem;
             }
-           
+
             .games-carousel {
                 padding: 10px 20px;
             }
@@ -325,10 +323,9 @@
             <h1 class="avatar-title">Игры из видео</h1>
             <p class="avatar-subtitle">Выберите игру</p>
         </section>
-       
+
         <section class="games-section">
             <div class="games-carousel" id="gamesCarousel">
-                <!-- Карточки игр -->
                 <div class="game-card">
                     <div class="game-name">TOWERRUSH</div>
                     <div class="icon-container">
@@ -336,46 +333,120 @@
                     </div>
                     <a href="https://t.me/+OMXl-zqWFVwzNmRi" target="_blank" class="play-button" onclick="startGame(event, 'TOWER RUSH')">Играть</a>
                 </div>
-                <!-- Остальные 3 карточки аналогично -->
-                <!-- (не менял, чтобы не удлинять) -->
+
+                <div class="game-card">
+                    <div class="game-name">AVIAMASTERS</div>
+                    <div class="icon-container">
+                        <img src="images/avia.jpg" alt="AVIAMASTERS" class="game-icon" onerror="handleImageError(this, 'AVIAMASTERS')">
+                    </div>
+                    <a href="https://t.me/+OMXl-zqWFVwzNmRi" target="_blank" class="play-button" onclick="startGame(event, 'AVIAMASTERS')">Играть</a>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-name">MINEDROP</div>
+                    <div class="icon-container">
+                        <img src="images/mine.jpg" alt="MINEDROP" class="game-icon" onerror="handleImageError(this, 'MINEDROP')">
+                    </div>
+                    <a href="https://t.me/+OMXl-zqWFVwzNmRi" target="_blank" class="play-button" onclick="startGame(event, 'MINEDROP')">Играть</a>
+                </div>
+
+                <div class="game-card">
+                    <div class="game-name">FISHING</div>
+                    <div class="icon-container">
+                        <img src="images/fish.png" alt="FISHING" class="game-icon" onerror="handleImageError(this, 'FISHING')">
+                    </div>
+                    <a href="https://t.me/+OMXl-zqWFVwzNmRi" target="_blank" class="play-button" onclick="startGame(event, 'FISHING')">Играть</a>
+                </div>
             </div>
-           
+
             <div class="carousel-dots" id="carouselDots"></div>
         </section>
-       
+
         <footer class="footer">
             <p>Все игры доступны в нашем Telegram-канале</p>
         </footer>
     </div>
 
-    <!-- JavaScript остаётся прежним, только updateDots чуть улучшен -->
     <script>
-        // ... (startGame, handleImageError как раньше)
+        function startGame(event, gameName) {
+            event.preventDefault();
+            const button = event.target;
+            const originalText = button.textContent;
+
+            button.textContent = "ОТКРЫВАЕМ...";
+            button.style.background = "linear-gradient(90deg, #00cc66, #00ff99)";
+            button.style.boxShadow = "0 8px 20px rgba(0, 204, 102, 0.5)";
+
+            const gameCard = button.closest('.game-card');
+            const iconContainer = gameCard.querySelector('.icon-container');
+
+            gameCard.style.borderColor = "rgba(0, 255, 204, 0.7)";
+            gameCard.style.boxShadow = "0 0 30px rgba(0, 255, 204, 0.4)";
+            iconContainer.style.boxShadow = "0 0 20px rgba(0, 255, 204, 0.3)";
+            iconContainer.style.animation = "pulse 0.5s ease 2";
+
+            if (!document.querySelector('#pulse-animation')) {
+                const style = document.createElement('style');
+                style.id = 'pulse-animation';
+                style.textContent = `@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.03); } }`;
+                document.head.appendChild(style);
+            }
+
+            setTimeout(() => {
+                window.open(button.href, '_blank');
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = "linear-gradient(90deg, #0066ff, #00ccff)";
+                    button.style.boxShadow = "0 6px 15px rgba(0, 102, 255, 0.3)";
+                    gameCard.style.borderColor = "rgba(0, 255, 204, 0.1)";
+                    gameCard.style.boxShadow = "";
+                    iconContainer.style.boxShadow = "none";
+                    iconContainer.style.animation = "";
+                }, 300);
+            }, 500);
+        }
+
+        function handleImageError(img, gameName) {
+            img.style.display = 'none';
+            const container = img.parentElement;
+            const errorText = document.createElement('div');
+            errorText.textContent = gameName;
+            errorText.style.cssText = `
+                display: flex; align-items: center; justify-content: center;
+                width: 100%; height: 100%; font-family: 'Orbitron', sans-serif;
+                font-weight: 700; font-size: 1.2rem; text-align: center;
+                background: linear-gradient(90deg, rgba(0, 255, 204, 0.1), rgba(0, 153, 255, 0.1));
+                color: rgba(0, 255, 204, 0.8); letter-spacing: 1.5px;
+                text-transform: uppercase; padding: 15px; border-radius: 8px;
+                word-break: break-word; overflow-wrap: break-word;
+            `;
+            container.appendChild(errorText);
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
             const carousel = document.getElementById('gamesCarousel');
             const dotsContainer = document.getElementById('carouselDots');
             const cards = carousel.querySelectorAll('.game-card');
-           
-            // Создаём точки
+
             cards.forEach(() => {
                 const dot = document.createElement('div');
                 dot.classList.add('dot');
                 dotsContainer.appendChild(dot);
             });
-           
+
             const dots = dotsContainer.querySelectorAll('.dot');
             if (dots.length > 0) dots[0].classList.add('active');
-           
+
             function updateDots() {
-                const cardWidth = cards[0].offsetWidth + 20; // ширина карточки + gap
+                if (cards.length === 0) return;
+                const cardWidth = cards[0].offsetWidth + 20;
                 const scrollLeft = carousel.scrollLeft;
                 const index = Math.round(scrollLeft / cardWidth);
                 dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
             }
-           
+
             carousel.addEventListener('scroll', updateDots);
-            carousel.addEventListener('touchend', updateDots); // для мобильных
+            carousel.addEventListener('touchend', updateDots);
             window.addEventListener('resize', updateDots);
         });
     </script>
